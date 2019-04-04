@@ -21,6 +21,7 @@ namespace MastermindConsoleApp
         public string GuessGeneratedNumber(string magicNumber, string userInput)
         {
             string feedbackForUser = "";
+            List<char> tempNumber = magicNumber.ToList<char>();
             if (!userInput.All(char.IsDigit))
             {
                 feedbackForUser = "Please enter a 4-digit number (no letters or special characters).";
@@ -36,15 +37,24 @@ namespace MastermindConsoleApp
                     if (userInput[i] == magicNumber[i])
                     {
                         feedbackForUser += '+';
+                        tempNumber.Remove(userInput[i]);
                     }
-                    else if (magicNumber.Contains(userInput[i]))
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    if (tempNumber.Contains(userInput[i]) && userInput[i] != magicNumber[i])
                     {
                         feedbackForUser += '-';
+                        tempNumber.Remove(userInput[i]);
                     }
                 }
                 if (feedbackForUser == "")
                 {
                     feedbackForUser = "No correct numbers.";
+                }
+                if (feedbackForUser == "++++")
+                {
+                    feedbackForUser = $"You win! {userInput} is correct!";
                 }
             }
             return feedbackForUser;

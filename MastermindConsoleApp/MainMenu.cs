@@ -20,6 +20,15 @@ namespace MastermindConsoleApp
                 string response = mastermind.GuessGeneratedNumber(magicNumber, userInput);
                 Console.WriteLine(response);
                 remainingGuesses -= 1;
+                if (remainingGuesses == 0)
+                {
+                    Console.WriteLine("Sorry, you've lost!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"You have {remainingGuesses} guess(es) remaining.");
+                }
             }
         }
     }
