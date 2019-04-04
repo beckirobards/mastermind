@@ -7,6 +7,10 @@ namespace MastermindConsoleApp
 {
     public class MastermindLogic
     {
+        /// <summary>
+        /// Generates the 4-digit number that the user must guess.
+        /// </summary>
+        /// <returns>string that consists of 4 characters (each is a digit between 1-6, inclusive)</returns>
         public string GenerateMastermindNumber()
         {
             string mastermindNumber = "";
@@ -18,10 +22,20 @@ namespace MastermindConsoleApp
             return mastermindNumber;
         }
 
+        /// <summary>
+        /// Compares user's guess to the randomly-generated 4-digit Mastermind number.
+        /// </summary>
+        /// <param name="magicNumber">4-digit number returned from GenerateMastermindNumber()</param>
+        /// <param name="userInput">User's guess of magicNumber's value</param>
+        /// <returns>string that tells user the accuracy of their guess and their number of remaining guesses</returns>
         public string GuessGeneratedNumber(string magicNumber, string userInput)
         {
+            // The response returned in the console after the user submits a guess
             string feedbackForUser = "";
+
+            // Collection of digits in magicNumber that is shortened as digits are guessed correctly
             List<char> tempNumber = magicNumber.ToList<char>();
+
             if (!userInput.All(char.IsDigit))
             {
                 feedbackForUser = "Please enter a 4-digit number (no letters or special characters).";
@@ -54,7 +68,7 @@ namespace MastermindConsoleApp
                 }
                 if (feedbackForUser == "++++")
                 {
-                    feedbackForUser = $"You win! {userInput} is correct!";
+                    feedbackForUser = $"{userInput} is correct!";
                 }
             }
             return feedbackForUser;
